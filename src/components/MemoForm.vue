@@ -37,7 +37,7 @@ export default {
 
 <template>
   <div class="section">
-    <div class="header">Create Memo</div>
+    <div class="header" v-text="selectedMemo ? 'Edit Memo' : 'Create Memo'"></div>
     <div class="fill-height">
       <div>
         <label>title</label>

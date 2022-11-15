@@ -11,7 +11,7 @@ export default {
   },
   computed: {
     currentMemo() {
-      return this.selectedMemo || { index: -1 };
+      return this.selectedMemo || { id: -1 };
     },
   },
 };
@@ -23,13 +23,13 @@ export default {
       <div class="header">Memo List</div>
       <div class="memo-list">
         <div
-          v-for="(todo, index) in todoList"
-          :key="index"
-          @click="$emit('selectMemo', index)"
+          v-for="todo in todoList"
+          :key="todo.id"
+          @click="$emit('selectMemo', todo)"
         >
           <p
             class="memo-title"
-            :class="{ selected: this.currentMemo.index === index }"
+            :class="{ selected: this.currentMemo.id === todo.id }"
           >
             {{ todo.title }}
           </p>
@@ -46,6 +46,7 @@ export default {
 .memo-list {
   padding-right: 30px;
 }
+
 .memo-title {
   color: blue;
   cursor: pointer;

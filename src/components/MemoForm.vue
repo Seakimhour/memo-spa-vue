@@ -5,6 +5,10 @@ export default {
       type: Object,
       required: false,
     },
+    lastId: {
+      type: Number,
+      required: true,
+    },
   },
   data() {
     return {
@@ -14,15 +18,23 @@ export default {
   },
   methods: {
     save() {
-      if (this.title) {
-        this.$emit("save", { title: this.title, content: this.content });
+      if (this.title.trim()) {
+        this.$emit("save", {
+          id: this.lastId,
+          title: this.title,
+          content: this.content,
+        });
         this.title = "";
         this.content = "";
       }
     },
     update() {
-      if (this.title) {
-        this.$emit("update", { title: this.title, content: this.content });
+      if (this.title.trim()) {
+        this.$emit("update", {
+          id: this.selectedMemo.id,
+          title: this.title,
+          content: this.content,
+        });
       }
     },
   },

@@ -11,6 +11,7 @@ export default {
   },
   data() {
     return {
+      lastId: 1,
       todoList: [],
       section: "None",
       selectedMemo: null,
@@ -22,30 +23,40 @@ export default {
     },
     store(memo) {
       this.todoList.push(memo);
-      localStorage.setItem("todoList", JSON.stringify(this.todoList));
+      this.updateLocalStorage();
+      this.lastId++;
+      localStorage.setItem("lastId", this.lastId);
     },
     update(memo) {
-      this.todoList[this.selectedMemo.index] = memo;
-      localStorage.setItem("todoList", JSON.stringify(this.todoList));
-      this.selectMemo(this.selectedMemo.index);
+      const index = this.todoList.map((todo) => todo.id).indexOf(memo.id);
+      this.todoList[index] = memo;
+      this.updateLocalStorage();
+      this.selectMemo(memo);
     },
     destroy() {
-      this.todoList.splice(this.selectedMemo.index, 1);
-      localStorage.setItem("todoList", JSON.stringify(this.todoList));
+      const index = this.todoList.map((todo) => todo.id).indexOf(this.selectedMemo.id);
+      this.todoList.splice(index, 1);
+      this.updateLocalStorage();
       this.section = "None";
       this.selectedMemo = null;
     },
-    selectMemo(index) {
-      this.selectedMemo = this.todoList[index];
-      this.selectedMemo.index = index;
+    selectMemo(memo) {
+      this.selectedMemo = memo;
       this.section = "ShowMemo";
     },
     create() {
       this.selectedMemo = null;
       this.section = "MemoForm";
     },
+    getLastId() {
+      return parseInt(localStorage.getItem("lastId")) || 1;
+    },
+    updateLocalStorage() {
+      localStorage.setItem("todoList", JSON.stringify(this.todoList));
+    },
   },
   created() {
+    this.lastId = this.getLastId();
     this.todoList = this.getTodoList();
   },
 };
@@ -63,6 +74,7 @@ export default {
       :is="section"
       :todo-list="todoList"
       :selected-memo="selectedMemo"
+      :last-id="lastId"
       @edit="section = 'MemoForm'"
       @save="store"
       @update="update"

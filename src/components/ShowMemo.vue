@@ -1,10 +1,6 @@
 <script>
 export default {
   props: {
-    todoList: {
-      type: Array,
-      required: true,
-    },
     selectedMemo: {
       type: Object,
       required: true,

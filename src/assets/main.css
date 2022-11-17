@@ -1,0 +1,72 @@
+@import './base.css';
+
+body {
+  display: flex;
+  color: black;
+}
+
+label {
+  color: gray;
+  font-size: 12px;
+  padding-left: 5px;
+}
+
+input, textarea {
+  width: 100%;
+  background-color: aliceblue;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 4px;
+  border-color: gray;
+  border-width: 1px;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+}
+
+button {
+  justify-content: center;
+  padding: 10px;
+  margin: 2px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+#app {
+  display: flex;
+  flex: 1 1 0%;
+  background-color: aliceblue;
+}
+
+.header {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px 0;
+}
+
+.section {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+}
+
+.action {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+}
+
+.fill-height {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+}
+
+.fill-width {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 0%;
+}

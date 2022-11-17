@@ -28,13 +28,15 @@ export default {
       localStorage.setItem("lastId", this.lastId);
     },
     update(memo) {
-      const index = this.todoList.map((todo) => todo.id).indexOf(memo.id);
+      const index = this.todoList.findIndex((todo) => todo.id === memo.id);
       this.todoList[index] = memo;
       this.updateLocalStorage();
       this.selectMemo(memo);
     },
     destroy() {
-      const index = this.todoList.map((todo) => todo.id).indexOf(this.selectedMemo.id);
+      const index = this.todoList.findIndex(
+        (todo) => todo.id === this.selectedMemo.id
+      );
       this.todoList.splice(index, 1);
       this.updateLocalStorage();
       this.section = "None";
